@@ -14,8 +14,8 @@ def show_post(img_name):
     # return 'Img %s' % img_name
     print(request.headers)
     with open("logFile.txt", "a") as logger:
-	logger.write(img_name + "~")
-	logger.write('%s~' % datetime.datetime.now())
+        logger.write(img_name + "~")
+        logger.write('%s~' % datetime.datetime.now())
         logger.write(request.headers["user-agent"] + "~")
         logger.write(request.headers["connection"] + "~")
         logger.write(request.headers["dnt"] + "~")
@@ -25,6 +25,7 @@ def show_post(img_name):
         logger.write(request.headers["accept-language"] + "~")
         logger.write(request.headers["accept-encoding"] + "\n")
     return render_template("root.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
