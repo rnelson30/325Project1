@@ -2,6 +2,7 @@ import datetime
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
+
 @app.route("/")
 def root():
     return render_template("root.html")
@@ -15,14 +16,38 @@ def show_post(img_name):
     with open("logFile.txt", "a") as logger:
         logger.write(img_name + "~")
         logger.write('%s~' % datetime.datetime.now())
-        logger.write(request.headers["user-agent"] + "~")
-        logger.write(request.headers["connection"] + "~")
-        logger.write(request.headers["dnt"] + "~")
-        logger.write(request.headers["host"] + "~")
-        logger.write(request.headers["upgrade-insecure-requests"] + "~")
-        logger.write(request.headers["accept"] + "~")
-        logger.write(request.headers["accept-language"] + "~")
-        logger.write(request.headers["accept-encoding"] + "\n")
+        if "user-agent" in request.headers:
+            logger.write(request.headers["user-agent"] + "~")
+        else:
+            logger.write("NaN~")
+        if "connection" in request.headers:
+            logger.write(request.headers["connection"] + "~")
+        else:
+            logger.write("NaN~")
+        if "dnt" in request.headers:
+            logger.write(request.headers["dnt"] + "~")
+        else:
+            logger.write("NaN~")
+        if "host" in request.headers:
+            logger.write(request.headers["host"] + "~")
+        else:
+            logger.write("NaN~")
+        if "upgrade-insecure-requests" in request.headers:    
+            logger.write(request.headers["upgrade-insecure-requests"] + "~")
+        else:
+            logger.write("NaN~")
+        if "accept" in request.headers:
+            logger.write(request.headers["accept"] + "~")
+        else:
+            logger.write("NaN~")
+        if "accept-language" in request.headers:
+            logger.write(request.headers["accept-language"] + "~")
+        else:
+            logger.write("NaN~")
+        if "accept-encoding" in request.headers:    
+            logger.write(request.headers["accept-encoding"] + "\n")
+        else:
+            logger.write("NaN~")
     return render_template("root.html")
 
 
