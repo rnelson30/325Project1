@@ -15,6 +15,11 @@ def show_post(img_name):
     print(request.headers)
     with open("logFile.txt", "a") as logger:
         logger.write(img_name + "~")
+	logger.write(request.remote_addr + "~")
+        if "Forwarded" in request.headers:
+            logger.write(request.headers["Forwarded"] + "~")
+        else:
+            logger.write("NaN~")
         logger.write('%s~' % datetime.datetime.now())
         if "user-agent" in request.headers:
             logger.write(request.headers["user-agent"] + "~")
