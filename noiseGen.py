@@ -10,15 +10,18 @@ with  open('logFile.csv', 'r') as datafile:
 
    rows = len(data)      # get number of rows
    cols = len(data[0])   # get number of cols
-
-   for row in data:
+  
+   for row in range(rows):
       if(randint(0, 1) == 0):    # flip a coin
-         noiseData.append(row)   # 0: add original row to new dataset 
+         noiseData.append(data[row])   # 0: add original row to new dataset 
       else:
          noiseRow = []           # 1: add noise row
          for i in range(cols):            # loop through column index
-            r = randint(0,rows-2)         # get random row in initial dataset
-            noiseRow.append(data[r][i])   # append row,col combination to noise row
+            if(randint(0,1) == 0):        # flip coin again
+               noiseRow.append(data[row][i]) # 0: add initial column value
+            else:                             # 1: 
+               r = randint(0,rows-2)         # get random row in initial dataset
+               noiseRow.append(data[r][i])   # append row,col combination to noise row
          noiseData.append(noiseRow)       # add noise row to new dataset
 
    with open('noiseLogFile.csv', 'w') as writeFile:  # make new csv
