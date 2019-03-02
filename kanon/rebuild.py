@@ -4,7 +4,6 @@ import pandas as pd
 
 full = pd.read_csv(sys.argv[1], sep="~")
 generalized = pd.read_csv(sys.argv[2], sep="~")
-
 final = pd.DataFrame(columns=["Image", "Forwarded", "Agent"])
 i = 0
 
@@ -21,4 +20,6 @@ for index, genRow in generalized.iterrows():
     "Agent" : genRow.Agent}, ignore_index=True)
   i = i + 1
 
+final = final.sample(frac=1)
+final = final.reset_index().drop(columns=['index'])
 final.to_csv("finalData.csv", sep="~")
