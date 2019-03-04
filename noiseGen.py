@@ -1,7 +1,8 @@
 from random import randint
 import csv
+import sys
 
-with  open('logFile.csv', 'r') as datafile:
+with  open(sys.argv[1], 'r') as datafile:
    datareader = csv.reader(datafile, delimiter='~')
    data = []
    noiseData = []
